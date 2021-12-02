@@ -1,8 +1,8 @@
-// const vin = "JN1AZ4EH7DM430111"
-// const api = "https://vpic.nhtsa.dot.gov/api//vehicles/decodevin/{vin}?format=json"
-const api2 = "/vehicles/getvehiclevariablelist?format=json"
+
 
 class VinService {
+    _apiBase = "https://vpic.nhtsa.dot.gov/api/vehicles";
+    _format = "?format=json";
 
     getResource = async (url) => {
         let res = await fetch(url);
@@ -13,11 +13,21 @@ class VinService {
         return await res.json();
     }
 
-    getVinInfo = (vin="JN1AZ4EH7DM430111") => {
-        return this.getResource(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`);
+    getVinInfo = async (vin="JN1AZ4EH7DM430111") => {
+        const res = await this.getResource(`${this._apiBase}/decodevin/${vin}${this._format}`);
+        return res.Results.map(this._transformVariables)
     }
     getVariable = () => {
-        return this.getResource("https://vpic.nhtsa.dot.gov/api/vehicles/getvehiclevariablelist?format=json")
+        return this.getResource(`${this._apiBase}/getvehiclevariablelist${this._format}`);
+    }
+
+    _transformVariables = (arr) => {
+        return {
+            id: arr.VariableId,
+            variable: arr.Variable,
+            value: arr.Value,
+
+        }
     }
 }
 

@@ -1,16 +1,52 @@
+import VinService from "../../servises/VinService";
+import {useEffect, useState} from "react";
+
+
 const DecodeList = () => {
-    return (
-        <div className="results_list">
-            <div className="header form_text my-3 text-start text-white">Results VIN Decode</div>
-            <ul className="list-group">
-                <li className="list-group-item list-group-item-default">Variable: Value</li>
-                <li className="list-group-item list-group-item-dark">Bus Floor Configuration Type: Not Applicable</li>
-                <li className="list-group-item list-group-item-default">Manufacturer Name: NISSAN MOTOR COMPANY, LTD</li>
-                <li className="list-group-item list-group-item-dark">Manufacturer Name: NISSAN MOTOR COMPANY, LTD</li>
-                <li className="list-group-item list-group-item-default">Manufacturer Name: NISSAN MOTOR COMPANY, LTD</li>
-                <li className="list-group-item list-group-item-dark">Manufacturer Name: NISSAN MOTOR COMPANY, LTD</li>
+
+    const [list, setList] = useState([]);
+
+    const vinService = new VinService();
+
+    useEffect(() => {
+        onRequest();
+    }, []);
+
+    const onListLoaded = (list) => {
+        setList(list);
+    }
+
+    const onRequest = () => {
+        const vin = "1FTFW1CT5DFC10312";
+        vinService
+            .getVinInfo(vin)
+            .then(onListLoaded)
+    }
+
+    /*RENDER ITEMS*/
+    const renderItems = (arr) => {
+        const items = arr.map(item => {
+            if (item.value !== null && item.value !== "" && item.value !== "0" && item.value !== "0 - VIN decoded clean. Check Digit (9th position) is correct") {
+                return (
+                    <li className="list-group-item list-group-item-default"
+                        key={item.id}>{item.variable} : {item.value}</li>
+                );
+            }
+        });
+        return (
+            <ul className="list-group pb-5">
+                {items}
             </ul>
-        </div>
+        );
+    }
+
+    const items = renderItems(list)
+
+    return (
+        <>
+            <div className="header form_text my-3 text-start text-white">Results VIN Decode</div>
+            {items}
+        </>
     );
 }
 
