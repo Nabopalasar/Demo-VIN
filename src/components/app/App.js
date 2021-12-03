@@ -4,6 +4,7 @@ import DecodeList from "../decodeList/DecodeList";
 
 import "./app.scss";
 import {useState} from "react";
+import Variable from "../variable/Variable";
 
 
 const App = () => {
@@ -11,15 +12,12 @@ const App = () => {
     const [vinVariables, setVinVariables] = useState([]);
     const [vin, setVin] = useState("");
 
-
-
     const getVinVariables = (arr, vin) => {
         setVinVariables(arr)
         setVin(vin)
     }
 
-    console.log(vinVariables)
-
+    /*RETURN*/
     return (
         <div className="app">
             <NavBar/>
@@ -30,6 +28,7 @@ const App = () => {
                 </div>
                 <Form getVariables={getVinVariables}/>
                 <DecodeList vinVariables={vinVariables} vin={vin}/>
+                <Variable/>
             </div>
         </div>
     );

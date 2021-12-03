@@ -1,27 +1,5 @@
-import VinService from "../../servises/VinService";
-import {useEffect, useState} from "react";
-
 
 const DecodeList = (props) => {
-
-    // const [list, setList] = useState([]);
-    //
-    // const {getVinInfo} = VinService();
-    //
-    // useEffect(() => {
-    //     onRequest();
-    //     // eslint-disable-next-line
-    // }, []);
-    //
-    // const onListLoaded = (list) => {
-    //     setList(list);
-    // }
-    //
-    // const onRequest = () => {
-    //     const vin = "1FTFW1CT5DFC10312";
-    //     getVinInfo(vin)
-    //         .then(onListLoaded)
-    // }
 
     /*RENDER ITEMS*/
     const renderItems = (arr) => {
@@ -41,8 +19,9 @@ const DecodeList = (props) => {
         );
     }
 
-    const items = renderItems(props.vinVariables)
+    const items = renderItems(props.vinVariables);
 
+    /*RETURN*/
     return (
         <>
             <div className="form_text my-3 text-start text-white">Results Decode VIN: <span className="form_text text-start text-success">{props.vin}</span></div>

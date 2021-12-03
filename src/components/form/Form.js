@@ -1,20 +1,17 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import VinService from "../../servises/VinService";
 
 
 const Form = (props) => {
 
     const [vin, setVin] = useState("");
-    const [vinVariables, setVinVariables] = useState([]);
-
 
     const {getVinInfo} = VinService();
-
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        onRequest(vin)
+        onRequest(vin);
     }
 
     const onRequest = (vin) => {
@@ -23,12 +20,15 @@ const Form = (props) => {
     }
 
     const onListLoaded = (list) => {
-        setVinVariables(list);
         props.getVariables(list, vin);
     }
 
-    // console.log(vinVariables)
+    /* VinCode Checker */
+    const checkVin = () => {
 
+    }
+
+    /*RETURN*/
     return (
         <form onSubmit={onSubmitHandler}>
             <div className="input-group mb-3">
