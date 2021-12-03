@@ -1,16 +1,43 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import VinService from "../../servises/VinService";
 
 
-const Form = () => {
+const Form = (props) => {
 
-    const [lastVin, setLastVin] = useState([]);
+    const [vin, setVin] = useState("");
+    const [vinVariables, setVinVariables] = useState([]);
 
+
+    const {getVinInfo} = VinService();
+
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+
+        onRequest(vin)
+    }
+
+    const onRequest = (vin) => {
+        getVinInfo(vin)
+            .then(onListLoaded)
+    }
+
+    const onListLoaded = (list) => {
+        setVinVariables(list);
+        props.getVariables(list, vin);
+    }
+
+    // console.log(vinVariables)
 
     return (
-        <>
+        <form onSubmit={onSubmitHandler}>
             <div className="input-group mb-3">
-                <input type="text" className="form-control" aria-label="Text input with segmented dropdown button"/>
-                <button type="button" className="btn btn-outline-success">Submit</button>
+                <input type="text"
+                       className="form-control"
+                       aria-label="Text input with segmented dropdown button"
+                       onChange={(e) => setVin(e.target.value)}
+                />
+                <button type="submit" className="btn btn-outline-success">Submit</button>
                 <button type="button" className="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="visually-hidden">Toggle Dropdown</span>
@@ -23,7 +50,7 @@ const Form = () => {
                     <li className="dropdown-item">Vin #5</li>
                 </ul>
             </div>
-        </>
+        </form>
     );
 }
 
