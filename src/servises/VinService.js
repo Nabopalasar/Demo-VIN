@@ -8,6 +8,7 @@ const  VinService = () => {
     const getResource = async (url) => {
         let res = await fetch(url);
 
+        console.log(res);
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }

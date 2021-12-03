@@ -5,6 +5,7 @@ import VinService from "../../servises/VinService";
 const Form = (props) => {
 
     const [vin, setVin] = useState("");
+    const [lastVin, setLastVin] = useState([]);
 
     const {getVinInfo} = VinService();
 
@@ -12,6 +13,7 @@ const Form = (props) => {
         e.preventDefault();
 
         onRequest(vin);
+        setVin("");
     }
 
     const onRequest = (vin) => {
@@ -25,7 +27,6 @@ const Form = (props) => {
 
     /* VinCode Checker */
     const checkVin = () => {
-
     }
 
     /*RETURN*/
@@ -35,6 +36,7 @@ const Form = (props) => {
                 <input type="text"
                        className="form-control"
                        aria-label="Text input with segmented dropdown button"
+                       value={vin}
                        onChange={(e) => setVin(e.target.value)}
                 />
                 <button type="submit" className="btn btn-outline-success">Submit</button>

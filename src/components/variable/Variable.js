@@ -4,12 +4,13 @@ import VinService from "../../servises/VinService";
 
 const Variable = () => {
 
-    const [vinList, setVinList] = useState();
+    const [vinList, setVinList] = useState([]);
 
     const {getVinList} = VinService();
 
     useEffect(() => {
         onRequest();
+        // eslint-disable-next-line
     }, [])
 
     const onRequest = () => {
@@ -23,29 +24,22 @@ const Variable = () => {
 
     console.log(vinList);
 
-    /*RENDER ITEMS*/
-    const renderItems = (arr) => {
-        const items = arr.map(item => {
-            return (
-                <li className="list-group-item list-group-item-default"
-                    key={item.id}>{item.name} : {item.description} : {item.group}</li>
-
-            );
-        });
-        return (
-            <ul className="list-group">
-                {items}
-            </ul>
 
 
-        )
-    }
-
-    const variables = renderItems(vinList);
+    // const variables = renderItems(vinList);
     /*RETURN*/
+    // return null
     return (
         <>
-            {variables}
+            <ul className="list-group">
+            {
+                vinList.map(
+                    item =>
+                    <li className="list-group-item list-group-item-default"
+                        key={item.id}>{item.name} : {item.description} : {item.group}</li>
+                )
+            }
+            </ul>
         </>
     );
 }
