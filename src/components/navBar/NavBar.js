@@ -1,12 +1,11 @@
-import VinService from "../../servises/VinService";
-
+import {Link, NavLink} from "react-router-dom";
 
 const NavBar = () => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">VIN Decoder</a>
+                <Link className="navbar-brand text-success" to="/">VIN Decoder</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -14,8 +13,8 @@ const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
-                        <a className="nav-link active" aria-current="page" href="/">Home</a>
-                        <a className="nav-link" href="variable">Variables</a>
+                        <NavLink className="nav-link" exact activeClassName="active" to="/">Home</NavLink>
+                        <NavLink className="nav-link" exact activeClassName="active" to="/variables">Variables</NavLink>
                     </div>
                 </div>
             </div>

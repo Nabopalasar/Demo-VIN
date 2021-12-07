@@ -1,10 +1,17 @@
+import {useState} from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+
+import Variables from "../variable/Variables";
 import NavBar from "../navBar/NavBar";
 import Form from "../form/Form";
 import DecodeList from "../decodeList/DecodeList";
 
 import "./app.scss";
-import {useState} from "react";
-import Variable from "../variable/Variable";
+import Header from "../header/Header";
 
 
 const App = () => {
@@ -19,18 +26,24 @@ const App = () => {
 
     /*RETURN*/
     return (
-        <div className="app">
-            <NavBar/>
-            <div className='container'>
-                <h1 className="mt-5 text-center text-white">Demo VIN Decoder</h1>
-                <div className="my-3 text-center text-white">
-                    Type 17 digits of your vehicles identification number.
+        <Router>
+            <div className="app">
+                <NavBar/>
+                <div className='container'>
+                    <Switch>
+                        <Route path="/variables">
+                            <Variables/>
+                        </Route>
+                        <Route path="/">
+                            <Header/>
+                            <Form getVariables={getVinVariables}/>
+                            <DecodeList vinVariables={vinVariables} vin={vin}/>
+                        </Route>
+
+                    </Switch>
                 </div>
-                <Form getVariables={getVinVariables}/>
-                <DecodeList vinVariables={vinVariables} vin={vin}/>
-                <Variable/>
             </div>
-        </div>
+        </Router>
     );
 }
 

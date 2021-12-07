@@ -13,26 +13,28 @@ const Form = (props) => {
         e.preventDefault();
 
         onRequest(vin);
+
+        setLastVin([...lastVin, vin].slice(-5))
         setVin("");
     }
 
     const onRequest = (vin) => {
         getVinInfo(vin)
-            .then(onListLoaded)
+            .then(onListLoaded);
     }
 
     const onListLoaded = (list) => {
         props.getVariables(list, vin);
     }
 
-    /* VinCode Checker */
-    const checkVin = () => {
-    }
+    const last = lastVin.map((item, id) =>
+        <li className="dropdown-item" key={id}>{item}</li>
+    );
 
-    /*RETURN*/
+
     return (
         <form onSubmit={onSubmitHandler}>
-            <div className="input-group mb-3">
+            <div className="input-group mb-3 shadow">
                 <input type="text"
                        className="form-control"
                        aria-label="Text input with segmented dropdown button"
@@ -45,11 +47,7 @@ const Form = (props) => {
                     <span className="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul className="dropdown-menu">
-                    <li className="dropdown-item">Vin #1</li>
-                    <li className="dropdown-item">Vin #2</li>
-                    <li className="dropdown-item">Vin #3</li>
-                    <li className="dropdown-item">Vin #4</li>
-                    <li className="dropdown-item">Vin #5</li>
+                    {lastVin.length > 0 ? last : null}
                 </ul>
             </div>
         </form>
