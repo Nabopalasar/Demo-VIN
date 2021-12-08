@@ -15,11 +15,17 @@ const Variables = () => {
 
     const onRequest = () => {
         getVinList()
-            .then(onListLoaded)
+            .then(onListLoaded);
     }
 
     const onListLoaded = (list) => {
         setVinList(list);
+    }
+// заготовка под открытие в новом табе
+    const openInNewWindow = (id) => {
+        if (id) {
+            window.open(`http://localhost:3000/variables/${id}`, "_blank");
+        }
     }
 
     return (
@@ -33,8 +39,12 @@ const Variables = () => {
                                         data-bs-target={`#flush-collapse${item.id}`} aria-expanded="false"
                                         aria-controls={`flush-collapse${item.id}`}>
                                     <strong>{item.name}</strong>
+                                    {/*заготовка под открытие в новом табе*/}
+                                    <div onClick={() => openInNewWindow(item.id)}>
+                                    </div>
                                 </button>
                             </h2>
+
                             <div id={`flush-collapse${item.id}`} className="accordion-collapse collapse"
                                  aria-labelledby={`flush-heading${item.id}`} data-bs-parent="#accordionFlushExample">
                                 <div className="accordion-body">

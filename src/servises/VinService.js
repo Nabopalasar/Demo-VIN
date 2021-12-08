@@ -8,7 +8,6 @@ const  VinService = () => {
     const getResource = async (url) => {
         let res = await fetch(url);
 
-        console.log(res);
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status: ${res.status}`);
         }
@@ -17,7 +16,9 @@ const  VinService = () => {
 
     const getVinInfo = async (vin) => {
         const res = await getResource(`${_apiBase}/decodevin/${vin}${_format}`);
+        const message = res.Message;
         return res.Results.map(_transformVariables);
+
     }
     const getVinList = async () => {
         const res = await getResource(`${_apiBase}/getvehiclevariablelist${_format}`);
@@ -42,7 +43,6 @@ const  VinService = () => {
         }
     }
 
-    /*RETURN*/
     return {
         getVinInfo,
         getVinList

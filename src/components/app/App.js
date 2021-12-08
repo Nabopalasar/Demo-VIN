@@ -9,9 +9,9 @@ import Variables from "../variable/Variables";
 import NavBar from "../navBar/NavBar";
 import Form from "../form/Form";
 import DecodeList from "../decodeList/DecodeList";
+import Header from "../header/Header";
 
 import "./app.scss";
-import Header from "../header/Header";
 
 
 const App = () => {
@@ -20,11 +20,10 @@ const App = () => {
     const [vin, setVin] = useState("");
 
     const getVinVariables = (arr, vin) => {
-        setVinVariables(arr)
-        setVin(vin)
+        setVinVariables(arr);
+        setVin(vin);
     }
 
-    /*RETURN*/
     return (
         <Router>
             <div className="app">
@@ -39,7 +38,6 @@ const App = () => {
                             <Form getVariables={getVinVariables}/>
                             <DecodeList vinVariables={vinVariables} vin={vin}/>
                         </Route>
-
                     </Switch>
                 </div>
             </div>

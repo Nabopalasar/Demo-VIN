@@ -1,6 +1,6 @@
-const ErrorMessage = () => {
+const ErrorMessage = (props) => {
     return (
-        <div className="text-danger">Server Error</div>
+        <div className="text-danger">{props.children}</div>
     )
 }
 
